@@ -1,4 +1,14 @@
 {% extends 'criminal/base.html' %}
 {% block title %} Criminal Search {% endblock %}
-{% block body %} <p>{{ content }}</p> {% endblock %}
+{% block maincontent %} 
+<p>Criminasl search</p>
+
+<form action="/criminal/search" method="post">
+{% csrf_token %}
+  <table>
+    {{ search_form.as_table }}
+  </table>
+<input type="submit" value="submit">
+</form>
+{% endblock %}
 

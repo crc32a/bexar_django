@@ -15,3 +15,6 @@ DATABASES:
     PORT: '3306'
     USER: <your user>
 SQLALCHEMY: mysql+mysqldb://<courtuser>:<courtpasswd>@<courthost>:3306/<courtdb>
+
+after that start the server via
+python manage.py runserver

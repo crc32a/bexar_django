@@ -5,6 +5,8 @@ from criminal.views import CriminalView
 # sharing a singleton
 def gview(request, *args, **kw):
     cv = CriminalView(request, *args, **kw)
+    cv.view_name = kw["view"]
+    cv.get_nav_links()
     func = getattr(cv, kw["view"] + "_view")
     return func()    
 

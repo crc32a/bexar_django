@@ -3,3 +3,5 @@ bexar/__pycache__/
 criminal/__pycache__/
 criminal/migration/__pycache__/
 criminal/scripts/__pycache__/
+.venv/
+.idea/

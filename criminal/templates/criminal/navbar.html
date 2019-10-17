@@ -1,0 +1,8 @@
+<ul class="nav nav-pills navbuttons">
+  <ul class="nav nav-pills">
+  {% for tablink in tablinks %}
+    <li class="nav-fill">
+      <a class="nav-link{%if tablink.isactive %} active{% endif %}" href="{{ tablink.url }}">{{tablink.link_text }}</a>
+    </li>
+  {% endfor %}
+</ul>
