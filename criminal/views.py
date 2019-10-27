@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from criminal import forms
+from criminal import forms, models
 
 import datetime
 
@@ -44,9 +44,42 @@ class CriminalView(object):
         ctx = self.ctx
         request = self.request
         self.template_name = "criminal/search.html"
-        if request.method == "POST":
-            pass
+        if self.form_named() == "CrimeSearchForm":
+            form = forms.CrimeSearchForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data # search criminals
+                qs = models.Criminal.objects
+                if "First Name" in data["search_by_field"]:
+                    fn = data["first_name"]
+                    if fn:
+                        qs = qs.filter(full_name__icontains = fn)
+                if "Last Name" in data["search_by_field"]:
+                    ln = data["last_name"]
+                    if ln:
+                        qs = qs.filter(full_name__icontains = ln)
+                if "Birth data" in data["search_by_field"]:
+                    bd = data["birthdate"]
+                    if bd:
+                        qs = qs.filter(birthdata = bd)
+                if "SID number" in data["search_by_field"]:
+                    sid = data["sid"]
+                    if sid and sid > 0:
+                        qs = qs.filter(sid = sid)
+                criminals = qs.order_by("birthdate").all()
+                n = len(criminals)
+                ctx["n_criminals"] = n
+                if n >= 1:
+                    ctx["criminals"] = []
+                    for c in criminals:
+                        criminal = {}
+                        criminal["full_name"] = c.full_name
+                        criminal["sex"] = c.sex
+                        criminal["birthdate"] = c.birthdate
+                        criminal["sid"] = c.sid
+                        ctx["criminals"].append(criminal)
+
         else:
-            ctx["search_form"] = forms.CrimeSearchForm()
+            form = forms.CrimeSearchForm()
+        ctx["search_form"] = form
         return self.myrender()
 

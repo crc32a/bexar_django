@@ -19,7 +19,7 @@ class CrimeSearchForm(IDForm):
     last_name = fields.CharField(required=False, max_length=42)
     birthdate = fields.DateField(required=False, widget=widgets.DateInput)
     sid = forms.IntegerField(required=False)
-    search_by_name = fields.MultipleChoiceField(
+    search_by_field = fields.MultipleChoiceField(
         required=False,
         widget=widgets.CheckboxSelectMultiple,
         choices=[("First Name", "first_name"),
