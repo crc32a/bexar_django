@@ -10,7 +10,7 @@ navlinks = [("search", "Criminal Search", "/criminal/search"),
 
 
 class CriminalView(object):
-    def __init__(self, request, *args, **kw):	
+    def __init__(self, request):
         self.request = request
         self.ctx = {}
         self.session = request.session
@@ -83,4 +83,21 @@ class CriminalView(object):
             form = forms.CrimeSearchForm()
         ctx["search_form"] = form
         return self.myrender()
+
+    def sid_view(self, sid):
+        self.template_name = "criminal/sid.html"
+        ctx = self.ctx
+        request = self.request
+        ctx["sid"] = sid
+        ctx["criminal"] = get_or_none(models.Criminal, sid=sid)
+
+        return self.myrender()
+
+def get_or_none(model, *args, **kw):
+    try:
+        qs = model.objects.get(*args, **kw)
+        return qs
+
+    except model.DoesNotExist:
+        return None
 

@@ -18,7 +18,7 @@
  
 <table class="table table-striped table-bordered">
   <caption> {{ n_criminals }} criminals found </caption>
-  <thead class="thead-dark"
+  <thead class="thead-dark">
   <tr>
     <th scope="col">Full Name</th>
     <th scope="col">Sex</th>
@@ -26,13 +26,13 @@
     <th scope="col">Sid</th>
   </tr>
   </thead>
-  {% for criminal in criminals %}
   <tbody>
+  {% for criminal in criminals %}
   <tr>
-    <th scope="row">{{ criminal.full_name }}</td>
+    <td scope="row">{{ criminal.full_name }}</td>
     <td>{{ criminal.sex }}</td>
     <td>{{ criminal.birthdate }}</td>
-    <td><a href="/criminal/criminal/{{ criminal.sid }}/">{{ criminal.sid }}<a/></td>
+    <td><a href="/criminal/sid/{{ criminal.sid }}/">{{ criminal.sid }}<a/></td>
   </tr>
   {% endfor %}
   </tbody>
