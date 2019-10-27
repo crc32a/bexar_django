@@ -42,6 +42,7 @@ class CriminalView(object):
 
     def search_view(self):
         ctx = self.ctx
+        ctx["datepickers"] = ["#id_birthdate"]
         request = self.request
         self.template_name = "criminal/search.html"
         if self.form_named() == "CrimeSearchForm":
@@ -57,18 +58,18 @@ class CriminalView(object):
                     ln = data["last_name"]
                     if ln:
                         qs = qs.filter(full_name__icontains = ln)
-                if "Birth data" in data["search_by_field"]:
+                if "Birth date" in data["search_by_field"]:
                     bd = data["birthdate"]
                     if bd:
-                        qs = qs.filter(birthdata = bd)
+                        qs = qs.filter(birthdate = bd)
                 if "SID number" in data["search_by_field"]:
                     sid = data["sid"]
                     if sid and sid > 0:
                         qs = qs.filter(sid = sid)
                 criminals = qs.order_by("birthdate").all()
-                n = len(criminals)
-                ctx["n_criminals"] = n
-                if n >= 1:
+                n_criminals = len(criminals)
+                ctx["n_criminals"] = n_criminals
+                if n_criminals >= 1:
                     ctx["criminals"] = []
                     for c in criminals:
                         criminal = {}

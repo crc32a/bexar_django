@@ -1,4 +1,7 @@
 {% extends 'criminal/base.html' %}
+{% block embed_javascript %}
+{% include 'criminal/datepicker.html' %}
+{% endblock %}
 {% block title %} Criminal Search {% endblock %}
 {% block maincontent %} 
 <p>Criminasl search</p>
@@ -11,8 +14,10 @@
 <input type="submit" value="submit">
 </form>
 {% if criminals %}
-<table class="table table-striped">
-  <caption> {{ n_criminals }} found </caption>
+  <h4><center> {{ n_criminals }} Matching records found </center></h4>
+ 
+<table class="table table-striped table-bordered">
+  <caption> {{ n_criminals }} criminals found </caption>
   <thead class="thead-dark"
   <tr>
     <th scope="col">Full Name</th>
