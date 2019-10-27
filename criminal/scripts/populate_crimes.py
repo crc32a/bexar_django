@@ -32,6 +32,10 @@ CHUNK_SIZE = 10000
 # This is the bexar court table via SQL alchemy this is not the django
 # Database
 
+def t(str_or_none):
+    if str_or_none:
+        return str_or_none.strip()
+
 class Court(Base):
     __tablename__ = 'court'
     id = Column(Integer, primary_key=True)
@@ -129,19 +133,19 @@ def run():
             cr = Criminal()
             sids[c.sid] = cr
             cr.sid = c.sid
-            cr.full_name = c.full_name
-            cr.sex = c.sex
+            cr.full_name = t(c.full_name)
+            cr.sex = t(c.sex)
             cr.birthdate = c.birthdate
-            cr.location = c.location
-            cr.race = c.race
+            cr.location = t(c.location)
+            cr.race = t(c.race)
 
             #Build Address table
             a = Address()
-            a.number = c.addr_house_nbr
-            a.street = c.addr_street
-            a.state = c.addr_state
-            a.city = c.addr_city
-            a.unit = c.addr_unit
+            a.number = t(c.addr_house_nbr)
+            a.street = t(c.addr_street)
+            a.state = t(c.addr_state)
+            a.city = t(c.addr_city)
+            a.unit = t(c.addr_unit)
             a.zip = c.addr_zip_code
             a.save()
             cr.address = a

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from criminal import forms, models
-
+import datetime
 import datetime
 
 navlinks = [("search", "Criminal Search", "/criminal/search"),
@@ -76,6 +76,7 @@ class CriminalView(object):
                         criminal["full_name"] = c.full_name
                         criminal["sex"] = c.sex
                         criminal["birthdate"] = c.birthdate
+                        criminal["age"] = calculate_age(c.birthdate)
                         criminal["sid"] = c.sid
                         ctx["criminals"].append(criminal)
 
@@ -89,8 +90,16 @@ class CriminalView(object):
         ctx = self.ctx
         request = self.request
         ctx["sid"] = sid
-        ctx["criminal"] = get_or_none(models.Criminal, sid=sid)
-
+        criminal = get_or_none(models.Criminal, sid=sid)
+        ctx["criminal"] = criminal
+        if not criminal:
+            return self.myrender()
+        ctx["address"] = criminal.address
+        qs = models.Crime.objects.filter(criminal=criminal)
+        crimes = qs.order_by("offense_date").all()
+        n_crimes = len(crimes)
+        ctx["n_crimes"] = n_crimes
+        ctx["crimes"] = crimes
         return self.myrender()
 
 def get_or_none(model, *args, **kw):
@@ -101,3 +110,8 @@ def get_or_none(model, *args, **kw):
     except model.DoesNotExist:
         return None
 
+def calculate_age(born):
+    today = datetime.date.today()
+    age = today.year - born.year
+    age -= ((today.month, today.day) < (born.month, born.day))
+    return age

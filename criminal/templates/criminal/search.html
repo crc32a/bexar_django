@@ -23,6 +23,7 @@
     <th scope="col">Full Name</th>
     <th scope="col">Sex</th>
     <th scope="col">Birthdate</th>
+    <th scope="col">Age</th>
     <th scope="col">Sid</th>
   </tr>
   </thead>
@@ -32,6 +33,7 @@
     <td scope="row">{{ criminal.full_name }}</td>
     <td>{{ criminal.sex }}</td>
     <td>{{ criminal.birthdate }}</td>
+    <td>{{ criminal.age }}</td>
     <td><a href="/criminal/sid/{{ criminal.sid }}/">{{ criminal.sid }}<a/></td>
   </tr>
   {% endfor %}
