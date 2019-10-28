@@ -102,6 +102,19 @@ class CriminalView(object):
         ctx["crimes"] = crimes
         return self.myrender()
 
+    def crime_view(self, crime_id):
+        self.template_name = "criminal/crime.html"
+        ctx = self.ctx
+        request = self.request
+        crime = get_or_none(models.Crime, id=crime_id)
+        if not crime:
+            return self.myrender()
+        ctx["criminal"] = crime.criminal
+        ctx["sid"] = crime.criminal.sid
+        ctx["crime"] = crime
+        return self.myrender()
+
+
 def get_or_none(model, *args, **kw):
     try:
         qs = model.objects.get(*args, **kw)

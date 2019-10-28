@@ -3,7 +3,7 @@ from bexar import settings
 from django.db import transaction
 from sqlalchemy import Column, Integer, String, Date, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
-from criminal.models import Criminal, Address, Crime, Attorney
+from criminal.models import Criminal, Address, Crime
 import sqlalchemy
 import sqlalchemy.orm
 import time
@@ -154,65 +154,51 @@ def run():
         # build crime table
         of = Crime() # Offense
         of.criminal = cr 
-        of.cause = c.case_cause_nbr
+        of.cause = t(c.case_cause_nbr)
         of.case_date = c.case_date
-        of.court = c.court
+        of.court = t(c.court)
         of.complaint_date = c.complaint_date
         of.offense_date = c.offense_date
         of.court_date = c.case_date
-        of.court_type = c.court_type
-        of.offense_desc = c.offense_desc
+        of.court_type = t(c.court_type)
+        of.offense_desc = t(c.offense_desc)
         of.offense_code = c.offense_code
-        of.offense_type = c.offense_type
+        of.offense_type = t(c.offense_type)
         of.court_cost = c.court_costs
         of.custody_date = c.custody_date
         of.fine_amount = c.fine_amount
-        of.case_desc = c.case_desc
+        of.case_desc = t(c.case_desc)
         of.judgment_code = c.judgement_code
         of.judgement_date = c.judgement_date
         of.judgement_number = c.judicial_nbr
         of.disposition_date = c.disposition_date
         of.disposition_code = c.disposition_code
-        of.disposition_desc = c.disposition_desc
+        of.disposition_desc = t(c.disposition_desc)
         of.grand_jury_date = c.g_jury_date
-        of.grand_jury_status = c.g_jury_status
-        of.intake_prosecutor = c.intake_prosecutor
-        of.outtake_prosecutor = c.outtake_prosecutor
-        of.revocation_prosecutor = c.revokation_prosecutor
-        of.probation_prosecutor = c.probation_prosecutor
+        of.grand_jury_status = t(c.g_jury_status)
+        of.intake_prosecutor = t(c.intake_prosecutor)
+        of.outtake_prosecutor = t(c.outtake_prosecutor)
+        of.revocation_prosecutor = t(c.revokation_prosecutor)
+        of.probation_prosecutor = t(c.probation_prosecutor)
         of.reduced_offense_code = c.reduced_offense_code
-        of.reduced_offense_desc = c.reduced_offense_desc
-        of.reduced_offense_type = c.reduced_offense_type
-        of.sentence = c.sentence
-        of.original_sentence = c.original_sentence
-        of.sentence_desc = c.sentence_desc
+        of.reduced_offense_desc = t(c.reduced_offense_desc)
+        of.reduced_offense_type = t(c.reduced_offense_type)
+        of.sentence = t(c.sentence)
+        of.original_sentence = t(c.original_sentence)
+        of.sentence_desc = t(c.sentence_desc)
         of.sentence_start_date = c.sentence_start_date
         of.sentence_end_date = c.sentence_end_date
         of.setting_date = c.setting_date
-        of.setting_type = c.setting_type
+        of.setting_type = t(c.setting_type)
         of.post_judicial_date = c.post_judicial_date
-        of.post_judicial_field = c.post_judicial_field
-
-        # Link attorney
-        try:
-            key = c.attorney_bar_nbr
-        except ValueError:
-            key = c.attorney
-        if key not in attorney:
-            at = Attorney()
-            at.name = c.attorney
-            at.appointed_retained = c.attorney_appointed_retained
-            at.bar_number = c.attorney_bar_nbr
-            at.save()
-            attorney[key] = at
-            of.attorney = at
-        else:
-            of.attorney = attorney[key]
-
+        of.post_judicial_field = t(c.post_judicial_field)
+        of.attorney_name = t(c.attorney)
+        of.attorney_appointed_retained = t(c.attorney_appointed_retained)
+        of.attorney_bar_nbr = c.attorney_bar_nbr
         of.bond_amount = c.bond_amount
         of.bond_date = c.bond_date
-        of.bond_status = c.bond_status
-        of.bondsman_name = c.bondsman_name
+        of.bond_status = t(c.bond_status)
+        of.bondsman_name = t(c.bondsman_name)
 
         of.save()
     transaction.commit()

@@ -12,7 +12,9 @@ def gview(request, *args, **kw):
     return func(*args, **kw)
 
 urlpatterns = [ path('search/', gview,{"view":"search"}, name="search"),
-                path('sid/<int:sid>/', gview, {"view":"sid"}, name="sid")
+                path('sid/<int:sid>/', gview, {"view":"sid"}, name="sid"),
+                path('crime/<int:crime_id>/', gview,{"view":"crime"},
+                     name="crime")
 ]
 
 

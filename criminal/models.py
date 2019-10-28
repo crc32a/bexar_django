@@ -37,13 +37,6 @@ class Criminal(models.Model):
                       self.birthdate, self.location, self.race)
 
 
-class Attorney(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models .CharField(max_length=32, db_index=True, null=True)
-    appointed_retained = models.CharField(max_length=3, null=True)
-    bar_number = models.PositiveIntegerField(db_index=True, null=True)
-
-
 class Crime(models.Model):
     id = models.AutoField(primary_key=True)
     cause = models.CharField(max_length=22, null=True)
@@ -89,9 +82,9 @@ class Crime(models.Model):
     bond_date = models.DateField(null=True)
     bond_status = models.CharField(max_length=5, null=True)
     bondsman_name = models.CharField(max_length=32, db_index=True, null=True)
-    
+    attorney_name = models .CharField(max_length=32, db_index=True, null=True)
+    attorney_appointed_retained = models.CharField(max_length=3, null=True)
+    attorney_bar_nbr = models.PositiveIntegerField(db_index=True, null=True)
 
     criminal = models.ForeignKey(Criminal, on_delete=models.CASCADE,
                                  null=False)
-    attorney = models.ForeignKey(Attorney, on_delete=models.CASCADE,
-                                 null=True)

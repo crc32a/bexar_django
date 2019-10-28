@@ -1,0 +1,275 @@
+{% extends 'criminal/base.html' %}
+{% block embed_javascript %}{% endblock %}
+{% block title %}SID{% endblock %}
+{% block maincontent %}
+{% if criminal %}
+<p><center>SID {{ sid }}</center></p>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope"col" colspan="2">Criminal Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">Full Name</td>
+      <td>{{ criminal.full_name }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Sex</td>
+      <td>{{ criminal.sex }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Birthdate</td>
+      <td>{{ criminal.birthdate }}</td>
+    </tr>
+    <tr>
+      <td scope="row">SID</td>
+      <td>{{ criminal.sid }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Location</td>
+      <td>{{ criminal.location }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Race</td>
+      <td>{{ criminal.race }}</td>
+    </tr>
+  </tbody>
+</table>
+{% else %}
+  <h1>SID {{ sid }} not found</h1>
+{% endif %}
+{% if address %}
+<p></p>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scop="row" colspan="2">Known Address</th>
+    </tr>
+  </theead>
+  <tbody>
+    <tr>
+      <td scope="row">Number</td>
+      <td>{{ address.number }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Street</td>
+      <td>{{ address.street }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Unit</td>
+      <td>{{ address.unit }}</td>
+    </tr>
+    <tr>
+      <td scope="row">City</td>
+      <td>{{ address.city }}</td>
+    </tr>
+    <tr>
+      <td scope="row">State</td>
+      <td>{{ address.state }}</td>
+    </tr>
+    <tr>
+      <td scope="row">zip</td>
+      <td>{{ address.zip }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+{% if crime %}
+<p></p>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="row" colspan="2">Offense Attributes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">Cause</td>
+      <td>{{ crime.cause }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Case date</td>
+      <td>{{ crime.case_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Court</td>
+      <td>{{ crime.court }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Complaint date</td>
+      <td>{{ crime.complaint_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Offense date</td>
+      <td>{{ crime.offense_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Court Date</td>
+      <td>{{ crime.court_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Court Type</td>
+      <td>{{ crime.court_type }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Offense</td>
+      <td>{{ crime.offense_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Offense cide</td>
+      <td>{{ crime.offense_code }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Offense Type</td>
+      <td>{{ crime.offense_type }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Court cost</td>
+      <td>{{ crime.court_cost }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Custody date</td>
+      <td>{{ crime.custody_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Fine amount</td>
+      <td>{{ crime.fine_amount }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Case description</td>
+      <td>{{ crime.case_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Judgement code</td>
+      <td>{{ crime.judgement_code }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Judgement date</td>
+      <td>{{ crime.judgement_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Judgement Description</td>
+      <td>{{ crime.judgement_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Judgement number</td>
+      <td>{{ crime.judgment_number }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Disposition Code</td>
+      <td>{{ crime.disposition_code }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Disposition date</td>
+      <td>{{ crime.disposition_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Disposition</td>
+      <td>{{ crime.disposition_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Grand jury date</td>
+      <td>{{ crime.grand_jury_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Grand jury status</td>
+      <td>{{ crime.grand_jury_status }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Intake prosecutor</td>
+      <td>{{ crime.intake_prosecutor }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Outtake prosecutor</td>
+      <td>{{ crime.outtake_prosecutor }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Revocation prosecutor</td>
+      <td>{{ crime.revocation_prosecutor }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Probation prosecutor</td>
+      <td>{{ crime. }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Reduced offense code</td>
+      <td>{{ crime.reduced_offense_code }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Reduced offense</td>
+      <td>{{ crime.reduced_offense_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Reduced offense type</td>
+      <td>{{ crime.reduced_offense_type }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Sentence</td>
+      <td>{{ crime.sentence }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Original sentence</td>
+      <td>{{ crime.original_sentence }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Sentence Description</td>
+      <td>{{ crime.sentence_desc }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Sentence start</td>
+      <td>{{ crime.sentence_start_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Sentence end</td>
+      <td>{{ crime.sentence_end_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Setting date</td>
+      <td>{{ crime.setting_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Setting type</td>
+      <td>{{ crime.setting_type }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Post judicial date</td>
+      <td>{{ crime.post_judicial_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Post judicial field</td>
+      <td>{{ crime.post_judicial_field }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Bond amount</td>
+      <td>{{ crime.bond_amount }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Bond date</td>
+      <td>{{ crime.bond_date }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Bond Status</td>
+      <td>{{ crime.bond_status }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Bondsmon name</td>
+      <td>{{ crime.bondsman_name }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Attorney Name</td>
+      <td>{{ crime.attorney_name }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Attorney bar number</td>
+      <td>{{ crime.attorney_bar_nbr }}</td>
+    </tr>
+    <tr>
+      <td scope="row">Attorney Hired Appointed</td>
+      <td>{{ crime.attorney_appointed_retained }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}
