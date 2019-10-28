@@ -111,6 +111,8 @@ def get_or_none(model, *args, **kw):
         return None
 
 def calculate_age(born):
+    if not born:
+        return None
     today = datetime.date.today()
     age = today.year - born.year
     age -= ((today.month, today.day) < (born.month, born.day))
