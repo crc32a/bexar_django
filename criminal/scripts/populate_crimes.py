@@ -106,6 +106,7 @@ class Court(Base):
 
 
 def run():
+    printf("populating criminal database\n")
     engine = get_engine()
     attach_engine(engine)
     transaction.commit()
